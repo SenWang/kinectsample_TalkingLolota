@@ -69,12 +69,11 @@ namespace WpfApplication1
             Title = e.Angle.ToString() + ":" + e.ConfidenceLevel;
 
             rec_and_play.RunWorkerAsync();
-
-
         }
+
         void _backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            Console.WriteLine("DoWork");
+            //Console.WriteLine("DoWork");
             StartRecord(kinect.AudioSource);
             StartPlayback();    
         }
@@ -87,6 +86,7 @@ namespace WpfApplication1
             lolota.Source = normal;
             Console.WriteLine("RunWorkerCompleted");
         }
+
         void StartRecord(KinectAudioSource audiosource)
         {
             int bufferSize = 50000;
@@ -98,6 +98,7 @@ namespace WpfApplication1
             SaveToWaveFile(soundSampleBuffer);
 
         }
+
         string filename = "record.wav";
         void SaveToWaveFile(byte[] sounddata)
         {
@@ -107,10 +108,10 @@ namespace WpfApplication1
                 wfw.Write(sounddata, 0, sounddata.Length);
             }
         }
+
         void StartPlayback()
         {
             FileStream fs =  new FileStream(filename, FileMode.Open, FileAccess.Read);
-
             SoundPlayer sp = new SoundPlayer(fs);
             sp.Play();
 
