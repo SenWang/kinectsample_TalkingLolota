@@ -31,14 +31,17 @@ namespace WpfApplication1
         BackgroundWorker rec_and_play;
         public Lolota(KinectSensor sensor) : this()
         {
+
+            #region 預先載入圖片
             normal = new BitmapImage(new Uri("normal.jpg",UriKind.Relative));
             listening_left = new BitmapImage(new Uri("listening_left.jpg", UriKind.Relative));
             listening_right = new BitmapImage(new Uri("listening_right.jpg", UriKind.Relative));
             listening_center = new BitmapImage(new Uri("listening_center.jpg", UriKind.Relative));
+            #endregion
 
             rec_and_play = new BackgroundWorker();
             rec_and_play.DoWork += _backgroundWorker_DoWork;
-            rec_and_play.RunWorkerCompleted +=   _backgroundWorker_RunWorkerCompleted;
+            rec_and_play.RunWorkerCompleted += _backgroundWorker_RunWorkerCompleted;
 
             kinect = sensor;
             kinect.Start();
@@ -64,7 +67,6 @@ namespace WpfApplication1
                 lolota.Source = listening_right;
 
             Title = e.Angle.ToString() + ":" + e.ConfidenceLevel;
-
 
             rec_and_play.RunWorkerAsync();
 
